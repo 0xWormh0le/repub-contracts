@@ -1,0 +1,3 @@
+transferID,email, address, amount, groupID, timeLockUntil, maxBalance, frozen
+1,alice@example.com,0x57ea4caa7c61c2f48ce26cd5149ee641a75f5f6f,150,1,0,10000,false
+2,bob@example.com,0x45d245d054a9cab4c8e74dc131c289207db1ace4,999,1,0,10000,false

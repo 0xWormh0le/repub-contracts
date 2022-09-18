@@ -1,0 +1,31 @@
+---
+name: Solana_tests
+
+on: [push]
+
+jobs:
+  Test:
+    runs-on: [ubuntu-20.04]
+    env:
+      solana_v: v1.7.10
+      artifact_file_name: target.tar.xz
+      artifact_name: target_output
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: |
+          docker build . \
+          --build-arg "solana_version=$solana_v" \
+          -t solana_test:latest
+          rm -rf $artifact_file_name
+          docker run -i solana_test:latest \
+          sh -c "cat $artifact_file_name" > $artifact_file_name
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.artifact_name }}
+          path: ${{ env.artifact_file_name }}
+          retention-days: 1

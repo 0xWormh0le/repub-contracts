@@ -1,0 +1,35 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      COIN_MARKET_CAP_API: ${{ secrets.COIN_MARKET_CAP_API }}
+      KOVAN: "witch collapse practice feed shame open despair creek road again ice least"
+      KOVAN_NETWORK_URL: ${{ secrets.KOVAN_NETWORK_URL }}
+      MAINNET: "witch collapse practice feed shame open despair creek road again ice least"
+      MAINNET_NETWORK_URL: ${{ secrets.MAINNET_NETWORK_URL }}
+      RINKEBY: "witch collapse practice feed shame open despair creek road again ice least"
+      RINKEBY_NETWORK_URL: ${{ secrets.KOVAN_NETWORK_URL }}
+
+    steps:      
+    - uses: actions/checkout@v2
+      
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.1.4
+
+    - name: NPM install cache
+      uses: c-hive/gha-npm-cache@v1
+    
+    - name: Install Node dependencies
+      run: npm install
+      
+    - name: Run Tests
+      run: npm test
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: coverage/

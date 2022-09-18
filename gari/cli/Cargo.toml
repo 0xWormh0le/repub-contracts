@@ -1,0 +1,24 @@
+[package]
+name = "cli_client"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+serde = "1.0.130"
+serde_json = "1.0.68"
+bigint = "4.4.3"
+clap = "2.33.3"
+dirs-next = "2.0.0"
+anchor-client = "0.14.0"
+spl-associated-token-account = "1.0.3"
+spl-token = { version="3.2.0", features = [ "no-entrypoint" ] }
+spl-token-metadata = { version = "0.0.1", features = [ "no-entrypoint" ] }
+solana-clap-utils = "1.7.11"
+solana-cli-config = "1.7.11"
+metadata = { path = "../programs/metadata", features = ["no-entrypoint"] }
+staking = { path = "../programs/staking", features = ["no-entrypoint"] }
+governance = { path = "../programs/governance", features = ["no-entrypoint"] }
+
+[[bin]]
+name = "cli-client"
+path = "src/main.rs"
